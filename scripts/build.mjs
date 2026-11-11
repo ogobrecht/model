@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'node:fs';
 console.log('ORACLE DATA MODEL UTILITIES: BUILD SQL SCRIPTS');
 
 console.log('- build file install/core.sql');

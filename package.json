@@ -7,18 +7,19 @@
     "url": "https://github.com/ogobrecht/model.git"
   },
   "scripts": {
-    "watch": "chokidar sources/*.* --initial --command \"npm run build\"",
-    "prebuild": "npx ploc --debug --in \"sources/*.pks\" --out \"docs/{file}.md\"",
-    "build": "node sources/build.js",
-    "postbuild": "echo exit | sqlplus -S /@playground @install/core.sql && echo exit | sqlplus -S /@playground @install/apex_extension.sql",
-    "uninstall": "echo exit | sqlplus -S /@playground @uninstall/model_packages.sql"
+    "watch": "node scripts/watch.mjs",
+    "prebuild": "npx ploc --in \"sources/*.pks\" --out \"docs/{file}.md\"",
+    "build": "node scripts/build.mjs",
+    "postbuild": "workdir/install.sh",
+    "uninstall": "workdir/uninstall.sh",
+    "help": "echo \"Create two files (workdir/install.sh, workdir/uninstall.sh) to run the SQL files in the folders install and uninstall against your test DB to verify the installation/uninstallation works.\""
   },
   "devDependencies": {
-    "chokidar-cli": "^3.0.0",
-    "glob": "^11.0.0",
+    "chokidar": "^6.0.0",
+    "glob": "^14.0.4",
     "markdown-toc": "^1.2.0",
-    "npm-check-updates": "^17.1.11",
+    "npm-check-updates": "^23.1.1",
     "npm-run-all": "^4.1.5",
-    "ploc": "^0.8.0"
+    "ploc": "^0.9.1"
   }
 }

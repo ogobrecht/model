@@ -42,7 +42,7 @@ prompt - Package model (spec)
 create or replace package model authid current_user is
 
 c_name    constant varchar2 (30 byte) := 'Oracle Data Model Utilities';
-c_version constant varchar2 (10 byte) := '0.9.1';
+c_version constant varchar2 (10 byte) := '0.9.2';
 c_url     constant varchar2 (34 byte) := 'https://github.com/ogobrecht/model';
 c_license constant varchar2 ( 3 byte) := 'MIT';
 c_author  constant varchar2 (15 byte) := 'Ottmar Gobrecht';
@@ -1037,7 +1037,7 @@ is
 begin
     select comments
       into l_comments
-      from all_tab_comments
+      from sys.all_tab_comments
      where owner      = p_owner
        and table_name = p_table_name;
 
@@ -1059,7 +1059,7 @@ is
 begin
     select comments
       into l_comments
-      from all_col_comments
+      from sys.all_col_comments
      where owner       = p_owner
        and table_name  = p_table_name
        and column_name = p_column_name;
@@ -1097,7 +1097,7 @@ is
 begin
     select generation_type
       into l_generation_type
-      from all_tab_identity_cols
+      from sys.all_tab_identity_cols
      where owner       = p_owner
        and table_name  = p_table_name
        and column_name = p_column_name;
@@ -1132,7 +1132,7 @@ begin
         when l_dict_tab_name in ('ALL_TAB_COLUMNS', 'ALL_TAB_COLUMNS') then
             select data_default
               into l_long
-              from all_tab_columns
+              from sys.all_tab_columns
              where owner       = p_owner
                and table_name  = l_table_name
                and column_name = l_column_name;
@@ -1145,7 +1145,7 @@ begin
         when l_dict_tab_name = 'ALL_NESTED_TABLE_COLS' then
             select data_default
               into l_long
-              from all_nested_table_cols
+              from sys.all_nested_table_cols
              where owner       = p_owner
                and table_name  = l_table_name
                and column_name = l_column_name;
@@ -1176,7 +1176,7 @@ begin
                and constraint_name = l_constraint_name;
         when 'ALL_CONSTRAINTS' then
             select search_condition into l_long
-              from all_constraints
+              from sys.all_constraints
              where owner = p_owner
                and constraint_name = l_constraint_name;
         else
@@ -1205,7 +1205,7 @@ begin
              where trigger_name = l_trigger_name;
         when 'ALL_TRIGGERS' then
             select trigger_body into l_long
-              from all_triggers
+              from sys.all_triggers
              where owner        = p_owner
                and trigger_name = l_trigger_name;
         else
@@ -1225,7 +1225,7 @@ is
     l_return varchar2( 32767 ) := 'select ';
 begin
     for i in ( select *
-                 from all_tab_columns
+                 from sys.all_tab_columns
                 where owner      = p_owner
                   and table_name = p_table_name
                 order by column_id )
@@ -1248,7 +1248,7 @@ is
     l_return varchar2(32767);
 begin
     for i in ( select *
-                 from all_tab_columns
+                 from sys.all_tab_columns
                 where owner      = p_owner
                   and table_name = p_table_name
                 order by column_id )

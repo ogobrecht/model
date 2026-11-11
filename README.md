@@ -52,9 +52,12 @@ package.
 
 ## Changelog
 
+- 0.9.2 (2026-11-11):
+  - Make PL/SQL package code independent of public synonyms
+  - Update dev dependencies
 - 0.9.1 (2024-11-16):
   - Create base mviews only when needed on installation
-  - Update node dependencies
+  - Update dev dependencies
 - 0.9.0 (2024-11-15):
   - Make base mview array private
   - Show installation errors in anonymous block instead of SQL query
